@@ -1,19 +1,23 @@
-[
-    {
-        "name": "Bison & Bird",
-        "address": "Clapham High Street 182",
-        "street": "Clapham High Street",
-        "houseNumber": "182",
-        "postCode": "SW4 7UG",
-        "latitude": "0.5672444",
-        "longitude": "0.234899",
-        "phoneNumber": "",
-        "contactName": "",
-        "type": "pub|bar|gastropub",
-        "photos": [],
-        "openingTimes": "",
-        "description": "",
-        "ameneties": [],
-        "logo": "logo.png"
-    }
-]
+{
+    "results": [
+        {
+            "name": "Bison & Bird",
+            "address": "Clapham High Street 182",
+            "street": "Clapham High Street",
+            "houseNumber": "182",
+            "postCode": "SW4 7UG",
+            "geoPoint": {
+                "latitude": 0.5672444,
+                "longitude": 0.234899,
+            },
+            "phoneNumber": "",
+            "contactName": "",
+            "type": "pub|bar|gastropub",
+            "photos": [],
+            "openingTimes": "",
+            "description": "",
+            "amenities": [],
+            "logo": ""
+        }
+    ]
+}

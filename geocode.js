@@ -7,19 +7,35 @@ var express = require('express');
 var app = express();
 var jsonfile = require('jsonfile');
 
-var API_KEY = 'AIzaSyBnUliMFphgKMXDmZkcZxTn4iFCnD0SKEo';
+var API_KEY = 'AIzaSyDcjxKBnc6aJFp8G9wZCp_uhbtvxIuQyag';
 
-var source = __dirname + '/data/england_-6.645_49.941_07395779.json';
+// API KEYS
+// --------------------------------------------------
+// momasz:      AIzaSyBnUliMFphgKMXDmZkcZxTn4iFCnD0SKEo //$
+// robson:      AIzaSyDqjUSdZNgk4abmD8Ewwi943FcAwl8bW-s //$
+// jano:        AIzaSyAvtrYT-UXebfua3yqT66Zu0QY-BeHv38U //$
+// maciek:      AIzaSyCm0JgjKN_-kSRlLdU7XJk35RTlA2GPEt0 //$
+// romanek.dev  AIzaSyDDL0zZ3vJdQEQ_O3f7iIV9damIY_bhEvo //$
+// mirek:       AIzaSyCiZowmkEHa6gRirtKlVyLNP_a9Yh0M2Bc //$
+// mefior:      AIzaSyA5_w7elie-6aAXbiw2_gXvHDUCXDoeE8k //$
+// wln:         AIzaSyDgHfunnAhnFEXYRze3OlCX5jYxdzeo9eY //$
+// ren:         AIzaSyDUsN9S5C0r3-PiEx6FPFiVC4KZvGwZeh8 //$
+// pablo:       AIzaSyDcjxKBnc6aJFp8G9wZCp_uhbtvxIuQyag //$
+// --------------------------------------------------
+
+var source = __dirname + '/data/england_-6.645_49.941_07395779.json'; //'/data/sample.json';
 
 var obj = JSON.parse(fs.readFileSync(source, 'utf8'));
 var geocodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&key=' + API_KEY + '&language=en-gb';
 var requests = [];
 var results = [];
-var index = parseInt(process.argv[2]) || 0;
-var maxIteration = 10;
+var index = parseInt(process.argv[2]) || 18597;
+var maxIteration = 2500;
 var max = index + maxIteration;
+var defects = [];
 
 var destination = __dirname + '/data/geocode_' + index + '_' + max + '.json';
+var errorFile = __dirname + '/data/defects_' + index + '_' + max + '.json';
 
 function makeCall (next) {
   var deffered = Q.defer();
@@ -45,14 +61,37 @@ function makeCall (next) {
       return next('error');
     }
 
+    if (params.status === 'OVER_QUERY_LIMIT') {
+      console.log('over query limit at index: ', index);
+      return next('error');
+    }
+
     index++;
 
+    function handleDefect () {
+      console.log('defect');
+
+      results.push(raw);
+
+      defects.push({
+        index: index,
+        name: raw.name
+      });
+
+      return next();
+    }
+
     if (!params.results[0]) {
-      next();
+      return handleDefect();
     }
 
     var addr = params.results[0];
-    var components = addr['address_components'];
+
+    if (typeof addr['address_components'] !== 'undefined') {
+      var components = addr['address_components'];
+    } else {
+      return handleDefect();
+    }
 
     function findKey(key) {
       return _.find(components, function (num) {
@@ -86,6 +125,9 @@ for (var i = 0, len = maxIteration; i < len; i++) {
 app.get('/', function (req, res) {
   async.forever(makeCall, function (result) {
     jsonfile.writeFile(destination, results, function (err) {
+      console.error(err);
+    });
+    jsonfile.writeFile(errorFile, defects, function (err) {
       console.error(err);
     });
     res.json(results);
