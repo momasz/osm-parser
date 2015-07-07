@@ -4,12 +4,14 @@ var JSONStream = require('JSONStream');
 var EOL = require('os').EOL;
 
 var source = __dirname + '/data/planet_-6.645_49.941_07395779.osm';
-var destination = __dirname + '/data/sample.json';
+var destination = __dirname + '/data/sample_geocode.json';
 
 var readstream = fs.createReadStream(source);
 var parser = OSMStream();
 var writestream = fs.createWriteStream(destination);
 var jsonParser;
+
+var index = 0;
 
 readstream
   .pipe(parser)
@@ -40,6 +42,7 @@ parser.on('node', function (node, callback) {
   if (amenity === 'bar'
     || amenity === 'pub'
     || amenity === 'gastropub') {
+
     var raw = {
       name: tags['name'] || null,
       address: tags['addr:city'] || null,
@@ -62,6 +65,7 @@ parser.on('node', function (node, callback) {
       wifi: tags['wifi'] || null,
       wheelchair: tags['wheelchair'] || null
     };
+
     callback(raw);
   } else {
     callback();
