@@ -7,7 +7,7 @@ var express = require('express');
 var app = express();
 var jsonfile = require('jsonfile');
 
-var API_KEY = 'AIzaSyDcjxKBnc6aJFp8G9wZCp_uhbtvxIuQyag';
+var API_KEY = 'AIzaSyA608ikt3pC3clvAXXgKSCdB0bJJizNRHU';
 
 // API KEYS
 // --------------------------------------------------
@@ -21,6 +21,9 @@ var API_KEY = 'AIzaSyDcjxKBnc6aJFp8G9wZCp_uhbtvxIuQyag';
 // wln:         AIzaSyDgHfunnAhnFEXYRze3OlCX5jYxdzeo9eY //$
 // ren:         AIzaSyDUsN9S5C0r3-PiEx6FPFiVC4KZvGwZeh8 //$
 // pablo:       AIzaSyDcjxKBnc6aJFp8G9wZCp_uhbtvxIuQyag //$
+// michal:      AIzaSyAAYvDaIfLFY0KJrnRCYT4JWb0BwmJG5jU //$
+// ano:         AIzaSyA608ikt3pC3clvAXXgKSCdB0bJJizNRHU
+// maniek:      AIzaSyBnz4Sj4E0s8fStyP8OUnMmThPIvM9RHB4 //$
 // --------------------------------------------------
 
 var source = __dirname + '/data/england_-6.645_49.941_07395779.json'; //'/data/sample.json';
@@ -29,7 +32,7 @@ var obj = JSON.parse(fs.readFileSync(source, 'utf8'));
 var geocodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&key=' + API_KEY + '&language=en-gb';
 var requests = [];
 var results = [];
-var index = parseInt(process.argv[2]) || 18597;
+var index = parseInt(process.argv[2]) || 23574;
 var maxIteration = 2500;
 var max = index + maxIteration;
 var defects = [];
