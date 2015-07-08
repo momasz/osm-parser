@@ -24,6 +24,7 @@ var API_KEY = 'AIzaSyA608ikt3pC3clvAXXgKSCdB0bJJizNRHU';
 // michal:      AIzaSyAAYvDaIfLFY0KJrnRCYT4JWb0BwmJG5jU //$
 // ano:         AIzaSyA608ikt3pC3clvAXXgKSCdB0bJJizNRHU
 // maniek:      AIzaSyBnz4Sj4E0s8fStyP8OUnMmThPIvM9RHB4 //$
+// czaki2:      AIzaSyBT9pr6jEY757z4UjTwpsTvuiduDXoaOGU
 // --------------------------------------------------
 
 var source = __dirname + '/data/england_-6.645_49.941_07395779.json'; //'/data/sample.json';
