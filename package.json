@@ -16,7 +16,8 @@
     "q": "^1.4.1",
     "query-overpass": "^1.0.0",
     "request": "^2.58.0",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "webshot": "^0.16.0"
   },
   "devDependencies": {},
   "scripts": {

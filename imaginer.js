@@ -8,8 +8,10 @@ var Q = require('q');
 var source = __dirname + '/data/parsed.json'; //'/data/sample.json';
 var destination = __dirname + '/data/images.json'; //'/data/sample.json';
 
+var API_KEY = 'AIzaSyDKEMAjvkNAq6XhobNttVWGpqMC7AOacu8';
+
 var obj = JSON.parse(fs.readFileSync(source, 'utf8'));
-var streetApiUrl = 'https://maps.googleapis.com/maps/api/streetview?size=640x480&location={lat},{lng}&fov=50';
+var streetApiUrl = 'https://maps.googleapis.com/maps/api/streetview?size=640x480&location={lat},{lng}&fov=50&key=' + API_KEY;
 
 var requests = [];
 var results = {
@@ -39,6 +41,14 @@ function makeCall (next) {
 
       console.log('content-type:', res.headers['content-type']);
       console.log('content-length:', res.headers['content-length']);
+
+      /*
+      if (res.headers['content-length'] < 10000) {
+        raw.image = null;
+      } else {
+        raw.image = imageName;
+      }
+      */
 
       request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
     });
