@@ -43,6 +43,7 @@ function parseElements (data) {
       "name": element.name,
       "address": element.address,
       "street": element.street,
+      "city": element.city,
       "houseNumber": element.houseNumber,
       "postCode": element.postCode,
       "geoPoint": {
