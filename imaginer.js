@@ -8,13 +8,14 @@ var path = require('path');
 
 
 var source = __dirname + '/data/parsed.json'; //'/data/sample.json';
-var destination = __dirname + '/data/images.json'; //'/data/sample.json';
+var destination = __dirname + '/data/images_address.json'; //'/data/sample.json';
 
 var API_KEY = 'AIzaSyDKEMAjvkNAq6XhobNttVWGpqMC7' +
   'AOacu8';
 
 var obj = JSON.parse(fs.readFileSync(source, 'utf8'));
-var streetApiUrl = 'https://maps.googleapis.com/maps/api/streetview?size=640x480&location={lat},{lng}&fov=50&key=' + API_KEY;
+var streetApiUrl = 'https://maps.googleapis.com/maps/api/streetview?size=640x480&location={lat},{lng}&fov=120&key=' + API_KEY;
+var streetApiUrWithAddress = 'https://maps.googleapis.com/maps/api/streetview?size=640x480&location={address}&key=' + API_KEY;
 
 var requests = [];
 var results = {
@@ -31,7 +32,8 @@ function makeCall (next) {
     return next('error');
   }
 
-  var url = streetApiUrl.replace('{lat}', raw.geoPoint.latitude).replace('{lng}', raw.geoPoint.longitude);
+  //var url = streetApiUrl.replace('{lat}', raw.geoPoint.latitude).replace('{lng}', raw.geoPoint.longitude);
+  var url = streetApiUrWithAddress.replace('{address}', raw.name + ', ' + raw.address);
   var imageName = raw.type + '_' + raw.geoPoint.latitude + '_' + raw.geoPoint.longitude + '.jpeg';
 
   raw.image = imageName;
@@ -59,6 +61,8 @@ function makeCall (next) {
         return next('error');
       }
 
+      console.log(raw.name + ', ' + raw.address);
+
       console.log('content-type:', res.headers['content-type']);
       console.log('content-length:', res.headers['content-length']);
 
@@ -66,7 +70,7 @@ function makeCall (next) {
     });
   };
 
-  check(url, __dirname + '/photos/' + imageName, function () {
+  check(url, __dirname + '/photos_address/' + imageName, function () {
     console.log('done');
     return next();
   });
