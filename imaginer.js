@@ -7,8 +7,8 @@ var Q = require('q');
 var path = require('path');
 
 
-var source = __dirname + '/data/parsed.json'; //'/data/sample.json';
-var destination = __dirname + '/data/images_address.json'; //'/data/sample.json';
+var source = __dirname + '/data/london.json'; //'/data/sample.json';
+var destination = __dirname + '/data/images_london.json'; //'/data/sample.json';
 
 var API_KEY = 'AIzaSyDKEMAjvkNAq6XhobNttVWGpqMC7' +
   'AOacu8';
@@ -70,7 +70,7 @@ function makeCall (next) {
     });
   };
 
-  check(url, __dirname + '/photos_address/' + imageName, function () {
+  check(url, __dirname + '/photos_120/' + imageName, function () {
     console.log('done');
     return next();
   });
