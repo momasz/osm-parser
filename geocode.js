@@ -7,25 +7,7 @@ var express = require('express');
 var app = express();
 var jsonfile = require('jsonfile');
 
-var API_KEY = 'AIzaSyBnUliMFphgKMXDmZkcZxTn4iFCnD0SKEo';
-
-// API KEYS
-// --------------------------------------------------
-// momasz:      AIzaSyBnUliMFphgKMXDmZkcZxTn4iFCnD0SKEo
-// robson:      AIzaSyDqjUSdZNgk4abmD8Ewwi943FcAwl8bW-s
-// jano:        AIzaSyAvtrYT-UXebfua3yqT66Zu0QY-BeHv38U
-// maciek:      AIzaSyCm0JgjKN_-kSRlLdU7XJk35RTlA2GPEt0
-// romanek.dev  AIzaSyDDL0zZ3vJdQEQ_O3f7iIV9damIY_bhEvo
-// mirek:       AIzaSyCiZowmkEHa6gRirtKlVyLNP_a9Yh0M2Bc
-// mefior:      AIzaSyA5_w7elie-6aAXbiw2_gXvHDUCXDoeE8k
-// wln:         AIzaSyDgHfunnAhnFEXYRze3OlCX5jYxdzeo9eY
-// ren:         AIzaSyDUsN9S5C0r3-PiEx6FPFiVC4KZvGwZeh8
-// pablo:       AIzaSyDcjxKBnc6aJFp8G9wZCp_uhbtvxIuQyag
-// michal:      AIzaSyAAYvDaIfLFY0KJrnRCYT4JWb0BwmJG5jU
-// ano:         AIzaSyA608ikt3pC3clvAXXgKSCdB0bJJizNRHU
-// maniek:      AIzaSyBnz4Sj4E0s8fStyP8OUnMmThPIvM9RHB4
-// czaki2:      AIzaSyBT9pr6jEY757z4UjTwpsTvuiduDXoaOGU
-// --------------------------------------------------
+var API_KEY = process.env.GOOGLE_API_KEY;
 
 var source = __dirname + '/data/england_-6.645_49.941_07395779.json'; //'/data/sample.json';
 
