@@ -10,8 +10,7 @@ var path = require('path');
 var source = __dirname + '/data/london.json'; //'/data/sample.json';
 var destination = __dirname + '/data/images_london.json'; //'/data/sample.json';
 
-var API_KEY = 'AIzaSyDKEMAjvkNAq6XhobNttVWGpqMC7' +
-  'AOacu8';
+var API_KEY = process.env.API_KEY;
 
 var obj = JSON.parse(fs.readFileSync(source, 'utf8'));
 var streetApiUrl = 'https://maps.googleapis.com/maps/api/streetview?size=640x480&location={lat},{lng}&fov=120&key=' + API_KEY;
